@@ -12,13 +12,13 @@ namespace Space_speed
     class Program
     {
         public const double G = 0.00000000006743014;
-        public static double M0;
-        public static double R0;
+        public static sbyte M0;
+        public static sbyte R0;
         public static double V1;
         public static double V2;
         public static double V3;
-        public static double M;
-        public static double R;
+        public static sbyte M;
+        public static sbyte R;
         public static string N;
         static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace Space_speed
             Console.WriteLine("\n Введите массу планеты M (в килограммах)");
             while (!isCorrect) //проверка на ввод буквы
             {
-                isCorrect = double.TryParse(Console.ReadLine(), out M0);
+                isCorrect = sbyte.TryParse(Console.ReadLine(), out M0);
                 if (!isCorrect)
                     Console.WriteLine("***** Ошибка ввода! Введите ПОЛОЖИТЕЛЬНО ЧИСЛО *****");
             }
@@ -43,7 +43,7 @@ namespace Space_speed
                 else
                 {
                     Console.WriteLine("***** Ошибка ввода! Введите ПОЛОЖИТЕЛЬНОЕ ЧИСЛО *****");
-                    double.TryParse(Console.ReadLine(), out M0);
+                    sbyte.TryParse(Console.ReadLine(), out M0);
                 }
             }
             int Rcycleid = 1; //нужно для проверки на положительное число
@@ -51,7 +51,7 @@ namespace Space_speed
             Console.WriteLine("\n Введите радиус планеты R (в метрах)");
             while (!iCorrect) //проверка на ввод буквы
             {
-                iCorrect = double.TryParse(Console.ReadLine(), out R0);
+                iCorrect = sbyte.TryParse(Console.ReadLine(), out R0);
                 if (!iCorrect)
                     Console.WriteLine("***** Ошибка ввода! Введите ПОЛОЖИТЕЛЬНОЕ ЧИСЛО *****");
             }
@@ -64,7 +64,7 @@ namespace Space_speed
                 else
                 {
                     Console.WriteLine("***** Ошибка ввода! Введите ПОЛОЖИТЕЛЬНОЕ ЧИСЛО *****");
-                    double.TryParse(Console.ReadLine(), out R0);
+                    sbyte.TryParse(Console.ReadLine(), out R0);
                 }
             }
             Console.Write("Все необходимые данные записаны\nПриготовтесь, консоль будет очищена через 5..");
@@ -97,12 +97,11 @@ namespace Space_speed
             using (PlanetsContext db = new PlanetsContext()) 
             {
                 Planets_Speed planet1 = new Planets_Speed { Name = $"{N}", Mass = M, Radius = R, First_Speed = V1, Second_Speed = V2, Third_Speed = V3 };
-                
                 // добавление данных в базу данных
                 db.Planets_Speed.Add(planet1);
                 db.SaveChanges();
                 Console.WriteLine("Объект успешно сохранен");
-                var planet_speed = db.Planets_Speed;
+                    var planet_speed = db.Planets_Speed;
                 Console.WriteLine("Список планет");
                 foreach (Planets_Speed u in planet_speed) //вывод самой базы
                 {
